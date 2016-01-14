@@ -11,7 +11,9 @@
 @interface AppDelegate ()
 {
     NSString *selectPath;
-    IBOutlet NSTextField  *remindLabel;
+    NSString *iconPath;
+    IBOutlet    NSTextField     *remindLabel;
+    IBOutlet    NSTextField     *remindIcon;
 }
 @property (weak) IBOutlet NSWindow *window;
 @end
@@ -24,6 +26,59 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+}
+
+-(IBAction)selectIconFile:(id)sender{
+    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+    [openDlg setCanChooseFiles:YES];
+    [openDlg setCanChooseDirectories:NO];
+    NSArray* fileTypes = [[NSArray alloc] initWithObjects:@"png", @"PNG", nil];
+    [openDlg setAllowedFileTypes:fileTypes];
+    if ([openDlg runModal] == NSModalResponseOK){
+        NSURL  *icon = [[openDlg URLs] firstObject];
+        iconPath = icon.path;
+        remindIcon.stringValue = iconPath;
+    }
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSString *saveDoubleDir = [[iconPath stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"icon"];
+    
+    BOOL isDir;
+    if(![fm fileExistsAtPath:saveDoubleDir isDirectory:&isDir] || !isDir){
+        [fm createDirectoryAtPath:saveDoubleDir withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+
+}
+
+-(IBAction)startMakeIcon:(id)sender{
+    if(!iconPath){
+        remindIcon.stringValue = @"请先选择原图片";
+        return;
+    }
+    NSMutableArray *sizes = @[@(29),@(58),@(87),@(80),@(120),@(180),@(57),@(114)].mutableCopy;
+    NSImage *image = [[NSImage alloc] initWithContentsOfFile:iconPath];
+    [self saveIconsInqueue:sizes withImage:image];
+}
+
+-(void)saveIconsInqueue:(NSMutableArray *)sizes withImage:(NSImage *)image{
+    remindIcon.stringValue = @"处理中...";
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSNumber *size = sizes[0];
+        NSImage *smallImage = [self imageByScalingProportionallyToSize:CGSizeMake(size.intValue, size.intValue) withOrigalImage:image];
+        
+        NSBitmapImageRep *bits = [self bitmapImageRepresentationWithImage:smallImage]; // get a rep from your image, or grab from a view
+        NSData *data = [bits representationUsingType: NSPNGFileType properties: nil];
+        [data writeToFile:[self getFinalIconSavePath:iconPath withSize:size.intValue] atomically:YES];
+        [sizes removeObjectAtIndex:0];
+        if(sizes.count == 0){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"completed");
+                remindIcon.stringValue = @"完成处理！";
+            });
+        }else{
+            [self saveIconsInqueue:sizes withImage:image];
+        }
+    });
 }
 
 -(IBAction)selectSourcePath:(id)sender{
@@ -46,7 +101,7 @@
 
 -(IBAction)selectOutputPath:(id)sender{
     if(!selectPath){
-        NSLog(@"请先选择路径");
+        remindLabel.stringValue = @"请先选择路径";
         return;
     }
     
@@ -88,6 +143,11 @@
             [self outputImagesForOtherDevice:paths];
         }
     });
+}
+
+-(NSString *)getFinalIconSavePath:(NSString *)bigIconPath withSize:(int)sizeValue{
+    NSString *dir = [bigIconPath stringByDeletingLastPathComponent];
+    return [[dir stringByAppendingPathComponent:@"icon"] stringByAppendingPathComponent:[NSString stringWithFormat:@"icon%d.png",sizeValue]];
 }
 
 -(NSString *)getFinalSavePath:(NSString *)origalPath{
