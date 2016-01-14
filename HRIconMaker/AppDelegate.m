@@ -115,8 +115,9 @@
         [fm createDirectoryAtPath:saveDoubleDir withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
+    NSArray *supportFormats = @[@"PNG",@"png",@"jpg",@"JPG",@"JPEG",@"jpeg"];
     for(NSString *path in subFiles){
-        if([[path stringByDeletingPathExtension] hasSuffix:@"@3x"]){
+        if([supportFormats containsObject:[path pathExtension]] && [[path stringByDeletingPathExtension] hasSuffix:@"@3x"]){
             [plusImages addObject:[selectPath stringByAppendingPathComponent:path]];
         }
     }
