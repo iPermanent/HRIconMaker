@@ -120,7 +120,11 @@
             [plusImages addObject:[selectPath stringByAppendingPathComponent:path]];
         }
     }
-    [self outputImagesForOtherDevice:plusImages];
+    if(plusImages.count > 0){
+        [self outputImagesForOtherDevice:plusImages];
+    }else{
+        remindLabel.stringValue = @"该路径下没有三倍图片，请以@3x结尾后再处理";
+    }
 }
 
 -(void)outputImagesForOtherDevice:(NSMutableArray *)paths{
