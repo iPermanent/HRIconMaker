@@ -55,7 +55,8 @@
         remindIcon.stringValue = @"请先选择原图片";
         return;
     }
-    NSMutableArray *sizes = @[@(29),@(58),@(87),@(80),@(120),@(180),@(57),@(114)].mutableCopy;
+//    NSMutableArray  *sizes = @[@(29),@(58),@(87),@(80),@(120),@(180),@(57),@(114)].mutableCopy;
+    NSMutableArray  *sizes  =   @[@(1024),@(512),@(256),@(128),@(64),@(32),@(16)].mutableCopy;
     NSImage *image = [[NSImage alloc] initWithContentsOfFile:iconPath];
     [self saveIconsInqueue:sizes withImage:image];
 }
@@ -67,7 +68,7 @@
         NSImage *smallImage = [self imageByScalingProportionallyToSize:CGSizeMake(size.intValue, size.intValue) withOrigalImage:image];
         
         NSBitmapImageRep *bits = [self bitmapImageRepresentationWithImage:smallImage]; // get a rep from your image, or grab from a view
-        NSData *data = [bits representationUsingType: NSPNGFileType properties: nil];
+        NSData *data = [bits representationUsingType: NSPNGFileType properties: [NSDictionary dictionary]];
         [data writeToFile:[self getFinalIconSavePath:iconPath withSize:size.intValue] atomically:YES];
         [sizes removeObjectAtIndex:0];
         if(sizes.count == 0){
@@ -136,7 +137,7 @@
         NSImage *smallImage = [self imageWithBigImage:image];
     
         NSBitmapImageRep *bits = [self bitmapImageRepresentationWithImage:smallImage]; // get a rep from your image, or grab from a view
-        NSData *data = [bits representationUsingType: NSPNGFileType properties: nil];
+        NSData *data = [bits representationUsingType: NSPNGFileType properties: [NSDictionary dictionary]];
         [data writeToFile:[self getFinalSavePath:path] atomically:YES];
         [paths removeObjectAtIndex:0];
         if(paths.count == 0){
