@@ -14,6 +14,7 @@
     NSString *iconPath;
     IBOutlet    NSTextField     *remindLabel;
     IBOutlet    NSTextField     *remindIcon;
+    IBOutlet    NSPopUpButton   *targetPlatform;
 }
 @property (weak) IBOutlet NSWindow *window;
 @end
@@ -50,13 +51,24 @@
 
 }
 
+-(BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag{
+    [_window makeKeyAndOrderFront:self];
+    return YES;
+}
+
 -(IBAction)startMakeIcon:(id)sender{
     if(!iconPath){
         remindIcon.stringValue = @"请先选择原图片";
         return;
     }
-//    NSMutableArray  *sizes = @[@(29),@(58),@(87),@(80),@(120),@(180),@(57),@(114)].mutableCopy;
-    NSMutableArray  *sizes  =   @[@(1024),@(512),@(256),@(128),@(64),@(32),@(16)].mutableCopy;
+    
+    NSMutableArray  *sizes;
+    NSString *platForm = targetPlatform.selectedItem.title;
+    if([platForm isEqualToString:@"iOS"]){
+        sizes = @[@(29),@(58),@(87),@(80),@(120),@(180),@(57),@(114)].mutableCopy;
+    }else{
+        sizes = @[@(1024),@(512),@(256),@(128),@(64),@(32),@(16)].mutableCopy;
+    }
     NSImage *image = [[NSImage alloc] initWithContentsOfFile:iconPath];
     [self saveIconsInqueue:sizes withImage:image];
 }

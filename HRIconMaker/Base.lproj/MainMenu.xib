@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15E27e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15E33e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
@@ -16,17 +16,18 @@
             <connections>
                 <outlet property="remindIcon" destination="3qQ-oR-SSo" id="Y3x-PV-FdV"/>
                 <outlet property="remindLabel" destination="kgO-Lx-ef8" id="n6J-5C-Cd1"/>
+                <outlet property="targetPlatform" destination="P4b-9X-o5C" id="oeZ-he-hwZ"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
-                <menuItem title="HRIconMaker" id="1Xt-HY-uBw">
+                <menuItem title="图片批量转换器" id="1Xt-HY-uBw">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="HRIconMaker" systemMenu="apple" id="uQy-DD-JDr">
+                    <menu key="submenu" title="图片批量转换器" systemMenu="apple" id="uQy-DD-JDr">
                         <items>
-                            <menuItem title="About HRIconMaker" id="5kV-Vb-QxS">
+                            <menuItem title="关于 图片批量转换器" id="5kV-Vb-QxS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-1" id="Exp-CZ-Vem"/>
@@ -40,7 +41,7 @@
                                 <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                            <menuItem title="Hide HRIconMaker" keyEquivalent="h" id="Olw-nP-bQN">
+                            <menuItem title="隐藏 图片批量转换器" keyEquivalent="h" id="Olw-nP-bQN">
                                 <connections>
                                     <action selector="hide:" target="-1" id="PnN-Uc-m68"/>
                                 </connections>
@@ -58,7 +59,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                            <menuItem title="Quit HRIconMaker" keyEquivalent="q" id="4sb-4s-VLi">
+                            <menuItem title="退出 图片批量转换器" keyEquivalent="q" id="4sb-4s-VLi">
                                 <connections>
                                     <action selector="terminate:" target="-1" id="Te7-pn-YzF"/>
                                 </connections>
@@ -659,7 +660,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                         <items>
-                            <menuItem title="HRIconMaker Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                            <menuItem title="图片批量转换器 Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
                                     <action selector="showHelp:" target="-1" id="y7X-2Q-9no"/>
                                 </connections>
@@ -669,7 +670,7 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="HRIconMaker" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="图片批量转换器" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="480" height="360"/>
@@ -700,7 +701,7 @@
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgO-Lx-ef8">
                         <rect key="frame" x="18" y="329" width="337" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="选择路径" id="M82-QQ-S9w">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="@3X图转@2X图，选择3X文件夹路径" id="M82-QQ-S9w">
                             <font key="font" size="13" name=".PingFangSC-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -727,13 +728,26 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3qQ-oR-SSo">
-                        <rect key="frame" x="22" y="249" width="326" height="17"/>
+                        <rect key="frame" x="22" y="249" width="106" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="选择Icon" id="qEK-z6-7Ck">
                             <font key="font" size="13" name=".PingFangSC-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P4b-9X-o5C">
+                        <rect key="frame" x="178" y="244" width="76" height="26"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="vZ9-Vv-8Mc">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="Q4G-Dc-pBa">
+                                <items>
+                                    <menuItem title="iOS" id="KOo-mU-341"/>
+                                    <menuItem title="OS X" id="Dhd-Z3-6Yf"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                    </popUpButton>
                 </subviews>
             </view>
         </window>

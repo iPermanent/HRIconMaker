@@ -14,7 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7E20B3A31C4638A700C047A1 /* HRIconMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HRIconMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E20B3A31C4638A700C047A1 /* 图片批量转换器.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "图片批量转换器.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E20B3A61C4638A700C047A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7E20B3A71C4638A700C047A1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7E20B3AA1C4638A700C047A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		7E20B3A41C4638A700C047A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7E20B3A31C4638A700C047A1 /* HRIconMaker.app */,
+				7E20B3A31C4638A700C047A1 /* 图片批量转换器.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,7 +88,7 @@
 			);
 			name = HRIconMaker;
 			productName = HRIconMaker;
-			productReference = 7E20B3A31C4638A700C047A1 /* HRIconMaker.app */;
+			productReference = 7E20B3A31C4638A700C047A1 /* 图片批量转换器.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -246,7 +246,7 @@
 				INFOPLIST_FILE = HRIconMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.henry.HRIconMaker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "图片批量转换器";
 			};
 			name = Debug;
 		};
@@ -258,7 +258,7 @@
 				INFOPLIST_FILE = HRIconMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.henry.HRIconMaker;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "图片批量转换器";
 			};
 			name = Release;
 		};
@@ -281,6 +281,7 @@
 				7E20B3B61C4638A700C047A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
