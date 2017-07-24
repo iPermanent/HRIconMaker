@@ -65,7 +65,7 @@
     NSMutableArray  *sizes;
     NSString *platForm = targetPlatform.selectedItem.title;
     if([platForm isEqualToString:@"iOS"]){
-        sizes = @[@(29),@(58),@(87),@(80),@(120),@(180),@(57),@(114)].mutableCopy;
+        sizes = @[@(29),@(40),@(60),@(58),@(87),@(80),@(120),@(180),@(57),@(114)].mutableCopy;
     }else{
         sizes = @[@(1024),@(512),@(256),@(128),@(64),@(32),@(16)].mutableCopy;
     }
